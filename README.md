@@ -1,4 +1,3 @@
-```markdown
 # Sovereign: Zero-Trust Local AI Pipeline
 
 This repository defines a fully isolated, zero-trust automation pipeline that connects a locally hosted AI agent to physical mobile hardware. By utilizing Tailscale network namespaces, default-deny egress firewalls, and an encrypted SSH bridge via Termux, the AI agent can execute native Android system changes without exposing local ports, relying on public cloud webhooks, or routing through standard Docker host bridges.
@@ -9,13 +8,14 @@ The architecture enforces strict microsegmentation. The LLM and the Agent exist 
 
 ```mermaid
 graph TD
-    subgraph Proxmox [Proxmox VM / Network Namespaces]
-        A[Ollama Container]
-        B[Hermes Agent Container]
-    end
-    A -->|Tailscale MagicDNS| B
-    B -->|SSH over Tailnet| C[Android Phone: Termux Listener]
+    A[Ollama Container] <-->|Tailscale MagicDNS| B[Hermes Agent Container]
+    B <-->|SSH over Tailnet| C[Android Phone: Termux Listener]
     C -->|Local Intent| D[Android System: Tasker Action]
+
+    subgraph Proxmox VM / Network Namespaces
+    A
+    B
+    end
 
 ```
 
@@ -119,7 +119,7 @@ volumes:
 
 1. Clone the repository:
 ```bash
-git clone [https://github.com/YOUR_USERNAME/sovereign-agent-infrastructure.git](https://github.com/YOUR_USERNAME/sovereign-agent-infrastructure.git)
+git clone https://github.com/YOUR_USERNAME/sovereign-agent-infrastructure.git
 cd sovereign-agent-infrastructure
 
 ```
@@ -185,7 +185,3 @@ The primary advantage of this zero-trust architecture is how it handles future i
 Because the AI agent is trapped within a dedicated network namespace and secured behind a default-deny egress firewall, it physically cannot exfiltrate data to the public internet. This specific security boundary allows safely mounting a private Obsidian markdown vault, local calendar files, and personal task lists directly into the agent's container.
 
 Moving forward, the agent will act as a fully private, locally executed orchestrator—reading daily notes and schedule, parsing the context natively via Ollama, and automatically dispatching environmental changes over the Tailnet, all while mathematically guaranteeing data never leaves the hardware boundary.
-
-```
-
-```
