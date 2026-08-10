@@ -1,4 +1,3 @@
-Understood. Here is the complete README text as a single, unified block of text:
 
 # Sovereign: Zero-Trust Local AI Pipeline
 
