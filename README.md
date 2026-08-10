@@ -47,7 +47,7 @@ services:
       retries: 5
 
   ollama:
-    image: ollama/ollama:latest
+    image: ollama/ollama:latest // I should probably change this to decrease the chances of supply chain attack
     container_name: ollama-node-app
     network_mode: service:tailscale-ollama
     environment:
