@@ -9,14 +9,13 @@ The architecture enforces strict microsegmentation. The LLM and the Agent exist 
 
 ```mermaid
 graph TD
-    A[Ollama Container] <-->|Tailscale MagicDNS| B[Hermes Agent Container]
-    B <-->|SSH over Tailnet| C[Android Phone: Termux Listener]
-    C -->|Local Intent| D[Android System: Tasker Action]
-
-    subgraph Proxmox VM / Network Namespaces
-    A
-    B
+    subgraph Proxmox [Proxmox VM / Network Namespaces]
+        A[Ollama Container]
+        B[Hermes Agent Container]
     end
+    A -->|Tailscale MagicDNS| B
+    B -->|SSH over Tailnet| C[Android Phone: Termux Listener]
+    C -->|Local Intent| D[Android System: Tasker Action]
 
 ```
 
