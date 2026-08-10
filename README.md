@@ -16,7 +16,6 @@ graph TD
     A
     B
     end
-
 ```
 
 ## Infrastructure Code
@@ -112,42 +111,32 @@ volumes:
   tailscale_ollama_state:
   tailscale_hermes_state:
   ollama_data:
-
 ```
 
 ## Quick Start
 
 1. Clone the repository:
-```bash
-git clone https://github.com/YOUR_USERNAME/sovereign-agent-infrastructure.git
-cd sovereign-agent-infrastructure
-
-```
-
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/sovereign-agent-infrastructure.git
+   cd sovereign-agent-infrastructure
+   ```
 
 2. Configure your environment variables:
-```bash
-cp .env.example .env
-nano .env
+   ```bash
+   cp .env.example .env
+   nano .env
+   ```
+   *(Fill in your Tailscale Auth Key, API key, and Tailnet name).*
 
-```
-
-
-*(Fill in your Tailscale Auth Key, API key, and Tailnet name).*
 3. Deploy the stack:
-```bash
-docker-compose up -d
-
-```
-
+   ```bash
+   docker-compose up -d
+   ```
 
 4. Verify container health:
-```bash
-docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-
-```
-
-
+   ```bash
+   docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+   ```
 
 ## Live Implementation
 
@@ -161,7 +150,6 @@ tailscale-ollama      Up 2 hours (healthy)
 ollama-node-app       Up 2 hours (healthy)        
 tailscale-sidecar     Up 2 hours (healthy)        
 sovereign-hermes      Up 2 hours (healthy)        
-
 ```
 
 **End-to-End Mock Test (LLM to Agent to Intent):**
@@ -175,7 +163,6 @@ LLM says: silent
 [MOCK ANDROID] Received intent: 3
 Action: Silent Mode ENABLED
 ==================================================
-
 ```
 
 ## Future Extensibility: Secure Personal Data Integration
