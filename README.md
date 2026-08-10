@@ -171,4 +171,4 @@ The primary advantage of this zero-trust architecture is how it handles future i
 
 Because the AI agent is trapped within a dedicated network namespace and secured behind a default-deny egress firewall, it physically cannot exfiltrate data to the public internet. This specific security boundary allows safely mounting a private Obsidian markdown vault, local calendar files, and personal task lists directly into the agent's container.
 
-Moving forward, the agent will act as a fully private, locally executed orchestrator—reading daily notes and schedule, parsing the context natively via Ollama, and automatically dispatching environmental changes over the Tailnet, all while mathematically guaranteeing data never leaves the hardware boundary.
+Moving forward, the agent will act as a fully private, locally executed orchestrator—reading daily notes and schedule, parsing the context natively via Ollama, and automatically dispatching environmental changes over the Tailnet.
