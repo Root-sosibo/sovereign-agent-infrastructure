@@ -17,6 +17,7 @@ graph TD
     A
     B
     end
+
 ```
 
 ## Infrastructure Code
@@ -112,47 +113,60 @@ volumes:
   tailscale_ollama_state:
   tailscale_hermes_state:
   ollama_data:
+
 ```
 
 ## Quick Start
 
 1. Clone the repository:
-   ```bash
-   git clone [https://github.com/YOUR_USERNAME/sovereign-agent-infrastructure.git](https://github.com/YOUR_USERNAME/sovereign-agent-infrastructure.git)
-   cd sovereign-agent-infrastructure
-   ```
+```bash
+git clone [https://github.com/YOUR_USERNAME/sovereign-agent-infrastructure.git](https://github.com/YOUR_USERNAME/sovereign-agent-infrastructure.git)
+cd sovereign-agent-infrastructure
+
+```
+
 
 2. Configure your environment variables:
-   ```bash
-   cp .env.example .env
-   nano .env
-   ```
-   *(Fill in your Tailscale Auth Key, API key, and Tailnet name).*
+```bash
+cp .env.example .env
+nano .env
 
+```
+
+
+*(Fill in your Tailscale Auth Key, API key, and Tailnet name).*
 3. Deploy the stack:
-   ```bash
-   docker-compose up -d
-   ```
+```bash
+docker-compose up -d
+
+```
+
 
 4. Verify container health:
-   ```bash
-   docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-   ```
+```bash
+docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+
+```
+
+
 
 ## Live Implementation
 
 The core architecture is deployed on the host environment. Below is the operational output from a live verification test:
 
 **Container Status:**
+
 ```text
 NAMES                 STATUS                 PORTS
 tailscale-ollama      Up 2 hours (healthy)        
 ollama-node-app       Up 2 hours (healthy)        
 tailscale-sidecar     Up 2 hours (healthy)        
 sovereign-hermes      Up 2 hours (healthy)        
+
 ```
 
 **End-to-End Mock Test (LLM to Agent to Intent):**
+
 ```text
 $ python3 src/agent/orchestrator.py
 What do you want to do? Turn on silent mode
@@ -162,14 +176,17 @@ LLM says: silent
 [MOCK ANDROID] Received intent: 3
 Action: Silent Mode ENABLED
 ==================================================
+
 ```
 
 ## Future Extensibility: Secure Personal Data Integration
 
-The primary advantage of this zero-trust architecture is how it handles future integration with highly sensitive personal data. 
+The primary advantage of this zero-trust architecture is how it handles future integration with highly sensitive personal data.
 
-Because the AI agent is trapped within a dedicated network namespace and secured behind a default-deny egress firewall, it physically cannot exfiltrate data to the public internet. This specific security boundary allows safely mounting a private Obsidian markdown vault, local calendar files, and personal task lists directly into the agent's container. 
+Because the AI agent is trapped within a dedicated network namespace and secured behind a default-deny egress firewall, it physically cannot exfiltrate data to the public internet. This specific security boundary allows safely mounting a private Obsidian markdown vault, local calendar files, and personal task lists directly into the agent's container.
 
 Moving forward, the agent will act as a fully private, locally executed orchestrator—reading daily notes and schedule, parsing the context natively via Ollama, and automatically dispatching environmental changes over the Tailnet, all while mathematically guaranteeing data never leaves the hardware boundary.
+
+```
 
 ```
