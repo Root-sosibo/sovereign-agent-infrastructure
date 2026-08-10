@@ -30,7 +30,7 @@ def ask_llm(prompt):
 
 def trigger_android(intent_code):
     print(f"Sending intent code {intent_code} to target...")
-    subprocess.run(["python3", "android/mock/mock_listener.py", str(intent_code)])
+    subprocess.run(["python3", "src/agent/android/mock/mock_listener.py", str(intent_code)])
 
 if __name__ == "__main__":
     user_input = input("What do you want to do? ")
